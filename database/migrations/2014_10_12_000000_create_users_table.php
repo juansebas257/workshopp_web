@@ -15,6 +15,12 @@ class CreateUsersTable extends Migration{
             $table->rememberToken();
             $table->timestamps();
         });
+
+        //creando usuarios
+        \DB::table('users')->insert([
+            ['name'=>'Sebastián Jiménez','email'=>'juansebas257@gmail.com','password'=>\Hash::make('Passw0rdStian')],
+            ['name'=>'Nayibi Silva','email'=>'nayiby.silva@gmail.com','password'=>\Hash::make('1204')]
+        ]);
     }
 
     public function down(){

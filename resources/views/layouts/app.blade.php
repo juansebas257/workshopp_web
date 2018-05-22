@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<?php $user=Auth::user();?>
+
+        <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="utf-8">
@@ -11,70 +13,68 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+    <link type="text/css" rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}"/>
+    <link type="text/css" rel="stylesheet" href="{{asset('css/app.css')}}"/>
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
+<div id="app">
+    <div class="navbar">
+        <nav>
+            <ul id="slide-out" class="sidenav sidenav-fixed">
+                <li><div class="user-view">
+                        <div class="background">
+                            <img src="images/office.jpg">
+                        </div>
+                        <a href="#user"><img class="circle" src="images/yuna.jpg"></a>
+                        <a href="#name"><span class="white-text name">John Doe</span></a>
+                        <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
+                    </div></li>
+                <li><a href="#!"><i class="fa fa-folder fa-2x left"></i>Áreas</a></li>
+                <li><div class="divider"></div></li>
+                <li><a href="#!"><i class="fa fa-folder-o fa-2x left"></i>Materias</a></li>
+                <li><a href="#!"><i class="fa fa-folder-open fa-2x left"></i>Exámenes</a></li>
+                <li><a href="#!"><i class="fa fa-folder fa-2x left"></i>Talleres</a></li>
+            </ul>
+            <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="fa fa-bars"></i></a>
 
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse" aria-expanded="false">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
+            <div class="nav-wrapper blue darken-4">
+                <span class="brand-logo">@yield('bar_title','Workshopp')</span>
 
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
-                </div>
+                <!--RIGHT MENU-->
+                <ul class="right">
+                    <li>
+                        <a class="dropdown-trigger" href="#!" data-activates='menu_profile'>
+                            <i class="fa fa-user-circle"></i> <span class="hide-on-small-only">{{$user->name}}</span>
+                            <i class="fa fa-caret-down right"></i>
+                        </a>
+                    </li>
+                </ul>
 
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
+                <!-- menu_perfil -->
+                <ul id="menu_profile" class="dropdown-content" style="width:200px;">
+                    <li><a href="#!"><i class="material-icons">account_circle</i>{{$user->name}}</a></li>
+                    <li class="divider"></li>
+                    <li>
+                        <a onclick="document.getElementById('logout-form').submit();"><i class="material-icons">exit_to_app</i>Cerrar Sesión</a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+                    </li>
+                </ul>
             </div>
         </nav>
-
-        @yield('content')
     </div>
+    @yield('content')
+</div>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.sidenav');
+        var instances = M.Sidenav.init(elems, null);
+    });
+</script>
 </body>
 </html>
