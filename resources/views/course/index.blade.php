@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
-@section('areas')
+@section('course')
     active
 @endsection
 
 @section('bar_title')
-    {{$area->name}}
+    Todas las materias
 @endsection
 
 @section('content')
@@ -16,7 +16,7 @@
             </div>
         @endif
         <div class="row">
-            @foreach($area->getCourses as $course)
+            @foreach($courses as $course)
                 <div class="col s12 m4">
                     <div class="card" style="height:200px">
                         <a href="{{route('course.show',$course->id)}}" style="text-decoration: none;" class="card-content">

@@ -8,7 +8,7 @@ class Course extends Model{
     protected $table = 'courses';
     protected $fillable = ['area','name'];
 
-    public function getCourses() {
-        return $this->hasMany('App\Course', 'area', 'id');
+    public function getDocuments() {
+        return $this->hasMany('App\Document', 'course', 'id');
     }
 }

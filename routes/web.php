@@ -17,5 +17,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'AreaController@index')->name('home');
 Route::resource('area', 'AreaController');
+Route::resource('course', 'CourseController');
+Route::resource('document', 'DocumentController');
+
+Route::post('api',['as'=>'api','uses'=>'APIController@index']);

@@ -11,6 +11,11 @@ class AreaController extends Controller{
         $this->middleware('auth');
     }
 
+    public function index(){
+        $areas=Area::get();
+        return view('area.index',compact('areas'));
+    }
+
     public function show($id){
         $area=Area::findOrFail($id);
         return view('area.show',compact('area'));

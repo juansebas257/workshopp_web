@@ -38,8 +38,9 @@ class CreateTables extends Migration{
             $table->integer('user')->unsigned();
             $table->foreign('user')->references('id')->on('users');
             $table->string('description');
-            $table->float('calification',2);
+            $table->decimal('calification',10,2)->nullable();
             $table->integer('type');//1.taller, 2.examen
+            $table->string('file');
             $table->string('teacher')->nullable();
             $table->timestamps();
         });

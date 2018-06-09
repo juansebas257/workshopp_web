@@ -10,3 +10,8 @@
 .brand-logo{
     margin-left:20px;
 }
+required:after{
+    content:'*';
+    color:red;
+    padding-left:5px;
+}
