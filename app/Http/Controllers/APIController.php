@@ -52,6 +52,9 @@ class APIController extends Controller{
                 case 'create_user':
                     return $this->create_user($request->name,$request->email,$request->password);
                     break;
+                case 'create_course':
+                    return $this->create_course($request->name);
+                    break;
             }
         } else {
             return json_encode(array(
@@ -93,6 +96,18 @@ class APIController extends Controller{
         $user->email=$email;
         $user->password=\Hash::make($password);
         $user->save();
+
+        return json_encode(array(
+            "response" => "OK",
+            "error" => false,
+            "content" =>''
+        ));
+    }
+
+    public function create_course($name){
+        $course=new Course();
+        $course->name=$name;
+        $course->save();
 
         return json_encode(array(
             "response" => "OK",
