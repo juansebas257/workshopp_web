@@ -9,7 +9,7 @@ class Document extends Model{
     protected $fillable = ['course','user','description','calification','type','file','teacher'];
 
     public function getCourse() {
-        return $this->belongsTo('App\Course', 'user', 'id');
+        return $this->belongsTo('App\Course', 'course', 'id');
     }
     public function getUser() {
         return $this->belongsTo('App\User', 'user', 'id');
