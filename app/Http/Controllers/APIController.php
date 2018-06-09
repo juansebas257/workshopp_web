@@ -53,7 +53,7 @@ class APIController extends Controller{
                     return $this->create_user($request->name,$request->email,$request->password);
                     break;
                 case 'create_course':
-                    return $this->create_course($request->name);
+                    return $this->create_course($request->name,$request->area);
                     break;
             }
         } else {
@@ -104,9 +104,10 @@ class APIController extends Controller{
         ));
     }
 
-    public function create_course($name){
+    public function create_course($name,$area){
         $course=new Course();
         $course->name=$name;
+        $course->area=$area;
         $course->save();
 
         return json_encode(array(
