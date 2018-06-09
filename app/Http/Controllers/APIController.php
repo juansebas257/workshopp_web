@@ -49,6 +49,9 @@ class APIController extends Controller{
                 case 'read_courses':
                     return $this->read_courses();
                     break;
+                case 'create_user':
+                    return $this->create_user($request->name,$request->email,$request->password);
+                    break;
             }
         } else {
             return json_encode(array(
@@ -67,7 +70,7 @@ class APIController extends Controller{
             "content" =>$user->toArray()
         ));
     }
-    
+
     public function read_documents(){
         return json_encode(array(
             "response" => "OK",
@@ -81,6 +84,20 @@ class APIController extends Controller{
             "response" => "OK",
             "error" => false,
             "content" =>Course::get()->toArray()
+        ));
+    }
+
+    public function create_user($name,$email,$password){
+        $user=new User();
+        $user->name=$name;
+        $user->email=$email;
+        $user->password=$password;
+        $user->save();
+        
+        return json_encode(array(
+            "response" => "OK",
+            "error" => false,
+            "content" =>''
         ));
     }
 

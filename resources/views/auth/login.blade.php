@@ -102,7 +102,7 @@
                         <div class="input-field col s12 has-error">
                             <i class="fa fa-user prefix"></i>
                             <input id="email" type="text" name="email" class="validate {{$errors->any()? 'invalid':''}}" value="{{ old('email') }}" required autofocus>
-                            <label for="email">Usuario</label>
+                            <label for="email">Email</label>
                         </div>
                         <div class="input-field col s12">
                             <i class="fa fa-lock prefix"></i>
