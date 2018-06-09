@@ -38,7 +38,7 @@ class APIController extends Controller{
         $email = $request->email;
         $password = $request->password;
 
-        if ($this->verifyAuth($email, $password)) {
+        if ($request->type=='create_user' || $this->verifyAuth($email, $password)) {
             switch ($request->type) {
                 case 'connect':
                     return $this->read_documents();
@@ -91,9 +91,9 @@ class APIController extends Controller{
         $user=new User();
         $user->name=$name;
         $user->email=$email;
-        $user->password=$password;
+        $user->password=\Hash::make($password);
         $user->save();
-        
+
         return json_encode(array(
             "response" => "OK",
             "error" => false,
