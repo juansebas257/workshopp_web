@@ -25,7 +25,9 @@ switch($extension){
 
 <div class="col s12 m4">
     <div class="card" style="height:200px">
-        <a href="#modal_{{$document->id}}" class="red-text pull-right modal-trigger"><i class="fa fa-remove fa-2x"></i></a>
+        @if($document->user==Auth::user()->id)
+            <a href="#modal_{{$document->id}}" class="red-text pull-right modal-trigger"><i class="fa fa-remove fa-2x"></i></a>
+        @endif
         <div href="{{route('document.show',$document->id)}}" style="text-decoration: none;" class="card-content">
             <div clas="card-content">
                 <p>
@@ -51,7 +53,12 @@ switch($extension){
         <p>¿Estás seguro que deseas eliminar este documento?</p>
     </div>
     <div class="modal-footer">
-        <a href="" class="waves-effect btn-flat red white-text">Eliminar</a>
-        <a href="#!" class="modal-close waves-effect btn-flat">Cancelar</a>
+
+        {!! Form::open(['route'=>['document.destroy',$document->id],'method'=>'DELETE','id'=>'modal_delete_form']) !!}
+        <div class="row">
+            <button href="" class="waves-effect btn-flat red white-text">Eliminar</button>
+            <a href="#!" class="modal-close waves-effect btn-flat">Cancelar</a>
+        </div>
+        {!! Form::close() !!}
     </div>
 </div>

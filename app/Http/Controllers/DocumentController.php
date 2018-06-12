@@ -49,4 +49,12 @@ class DocumentController extends Controller{
         Session::flash('success', 'Documento guardado satisfactoriamente.');
         return redirect()->route('course.show',$document->course);
     }
+
+    public function destroy($id){
+        $document=Document::findOrFail($id);
+        $document->delete();
+
+        Session::flash('success', 'Documento eliminado satisfactoriamente.');
+        return redirect()->back();
+    }
 }
